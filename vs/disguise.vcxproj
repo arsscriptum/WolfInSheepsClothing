@@ -63,13 +63,11 @@
     <TargetName>disguise</TargetName>
     <GenerateManifest>false</GenerateManifest>
   </PropertyGroup>
-  
   <ItemGroup>
     <ClCompile Include="..\src\app\cmdline.cpp" />
     <ClCompile Include="..\src\app\init.cpp" />
-    <ClCompile Include="..\src\app\main.cpp" />
     <ClCompile Include="..\src\app\stdafx.cpp">
-    	<PreCompiledHeader>Create</PreCompiledHeader>
+      <PreCompiledHeader>Create</PreCompiledHeader>
     </ClCompile>
     <ClCompile Include="..\src\app\windows-api-ex.cpp" />
     <ClCompile Include="..\src\disguise.cpp" />

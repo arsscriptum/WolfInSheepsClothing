@@ -90,16 +90,10 @@ goto :init
 :: ==============================================================================
 ::   Build static
 :: ==============================================================================
-:build_debug
+:build_x86
     call :call_make_build Debug x86
     goto :eof
 
-:: ==============================================================================
-::   Build x64
-:: ==============================================================================
-:build_x64
-    call :call_make_build_export Release x64 "c:\Programs\SystemTools"
-    goto :eof
 
 :: ==============================================================================
 ::   clean all
@@ -118,17 +112,8 @@ goto :init
 :build
 	if "%__target%" == "clean" (
 		call :clean
-		goto :finished
 		)
-    if "%__target%" == "rebuild" (
-		call :clean
-		)
-    if "%__target%" == "debug" (
-        call :build_debug
-        goto :finished
-        )
-    ::call :build_x86
-    call :build_x64
+    call :build_x86
     goto :finished
 
 
