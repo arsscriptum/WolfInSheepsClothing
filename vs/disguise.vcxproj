@@ -71,6 +71,8 @@
     </ClCompile>
     <ClCompile Include="..\src\app\windows-api-ex.cpp" />
     <ClCompile Include="..\src\disguise.cpp" />
+    <ClCompile Include="..\src\log.cpp" />
+    <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\PE.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
@@ -96,6 +98,7 @@
     <ClInclude Include="..\src\app\targetver.h" />
     <ClInclude Include="..\src\app\windows-api-ex.h" />
     <ClInclude Include="..\src\internals.h" />
+    <ClInclude Include="..\src\log.h" />
     <ClInclude Include="..\src\PE.h" />
     <ClInclude Include="..\src\targetver.h" />
   </ItemGroup>

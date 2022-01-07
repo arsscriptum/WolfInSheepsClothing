@@ -11,7 +11,7 @@
 #include "stdafx.h"
 #include "windows-api-ex.h"
 #include "Shlwapi.h"
-
+#include <winternl.h>
 namespace C
 {
 	namespace Convert

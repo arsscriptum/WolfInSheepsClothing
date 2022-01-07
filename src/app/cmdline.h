@@ -49,9 +49,14 @@ public:
 		}
 	}
 
-	const std::string& getCmdOption(const std::string &option) const {
+	const std::string& getCmdOption(const std::string &option1, const std::string& option2) const {
 		std::vector<std::string>::const_iterator itr;
-		itr = std::find(this->tokens.begin(), this->tokens.end(), option);
+		itr = std::find(this->tokens.begin(), this->tokens.end(), option1);
+		if (itr != this->tokens.end() && ++itr != this->tokens.end())
+		{
+			return *itr;
+		}
+		itr = std::find(this->tokens.begin(), this->tokens.end(), option2);
 		if (itr != this->tokens.end() && ++itr != this->tokens.end())
 		{
 			return *itr;

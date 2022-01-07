@@ -14,7 +14,6 @@
 
 #include <fstream>
 #include <Windows.h>
-#include <winternl.h>
 #include <shlobj.h>
 #include <Shlwapi.h>
 #include <TlHelp32.h>
