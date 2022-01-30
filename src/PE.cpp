@@ -80,8 +80,16 @@ PLOADED_IMAGE ReadRemoteImage(HANDLE hProcess, LPCVOID lpImageBaseAddress)
 
 	PLOADED_IMAGE pImage = new LOADED_IMAGE();
 
+#ifdef _WIN64
+	pImage->FileHeader = (PIMAGE_NT_HEADERS) ((BYTE*)lpBuffer+pDOSHeader->e_lfanew);
+	//pImage->FileHeader = 
+	//	(IMAGE_NT_HEADERS *)(lpBuffer + pDOSHeader->e_lfanew);
+#else
 	pImage->FileHeader = 
-		(PIMAGE_NT_HEADERS32)(lpBuffer + pDOSHeader->e_lfanew);
+		(IMAGE_NT_HEADERS *)(lpBuffer + pDOSHeader->e_lfanew);
+#endif
+		
+
 
 	pImage->NumberOfSections = 
 		pImage->FileHeader->FileHeader.NumberOfSections;
@@ -90,11 +98,11 @@ PLOADED_IMAGE ReadRemoteImage(HANDLE hProcess, LPCVOID lpImageBaseAddress)
 #ifdef _WIN64
 	pImage->Sections = 
 		(PIMAGE_SECTION_HEADER)(lpBuffer + pDOSHeader->e_lfanew + 
-		sizeof(IMAGE_NT_HEADERS64));
+		sizeof(IMAGE_NT_HEADERS ));
 #else
 	pImage->Sections =
 		(PIMAGE_SECTION_HEADER)(lpBuffer + pDOSHeader->e_lfanew +
-			sizeof(IMAGE_NT_HEADERS32));
+			sizeof(IMAGE_NT_HEADERS ));
 #endif
 	return pImage;
 }

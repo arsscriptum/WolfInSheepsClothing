@@ -101,16 +101,16 @@
       <PreprocessorDefinitions>RELEASE;DEVELOPMENT;DEBUG_INFO;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)'=='NtAuthSystem'">
+  <ItemDefinitionGroup Condition="'$(Platform)'=='x64'">
     <ClCompile>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <PreprocessorDefinitions>RELEASE;DEVELOPMENT;DEBUG_INFO;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WIN64;WIN64;RELEASE;DEVELOPMENT;DEBUG_INFO;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>  
  
-  <Target Name="PrintBuildConfig" BeforeTargets="InitializeBuildStatus">
+  <Target Name="PrintBuildConfig" BeforeTargets="Build">
     <Message Text="================================================================================================" />
     <Message Text="    *** application props ***   " />
     <Message Text="CharacterSet: $(CharacterSet)." />

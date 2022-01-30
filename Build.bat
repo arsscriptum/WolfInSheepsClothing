@@ -91,7 +91,7 @@ goto :init
 ::   Build static
 :: ==============================================================================
 :build_x86
-    call :call_make_build Debug x86
+    call :call_make_build Release Win32
     goto :eof
 
 

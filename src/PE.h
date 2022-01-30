@@ -153,8 +153,15 @@ typedef struct BASE_RELOCATION_ENTRY {
 	sizeof(BASE_RELOCATION_ENTRY)
 
 inline PEB* GetPEB()
+//{
+//	__asm mov eax, dword ptr fs:0x30;
+//}
 {
-	__asm mov eax, dword ptr fs:0x30;
+#if defined(_WIN64)
+    return (PPEB)__readgsqword(0x60);
+#else
+    return (PPEB)__readfsdword(0x30);
+#endif
 }
 
 inline PIMAGE_NT_HEADERS32 GetNTHeaders(DWORD dwImageBase)
@@ -170,8 +177,15 @@ inline PLOADED_IMAGE GetLoadedImage(DWORD dwImageBase)
 
 	PLOADED_IMAGE pImage = new LOADED_IMAGE();
 
+	
+
+#ifdef _WIN64
+	pImage->FileHeader = 
+		(PIMAGE_NT_HEADERS64)(dwImageBase + pDosHeader->e_lfanew);
+#else
 	pImage->FileHeader = 
 		(PIMAGE_NT_HEADERS32)(dwImageBase + pDosHeader->e_lfanew);
+#endif
 
 	pImage->NumberOfSections = 
 		pImage->FileHeader->FileHeader.NumberOfSections;
