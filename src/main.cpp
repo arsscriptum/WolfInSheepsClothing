@@ -17,9 +17,8 @@ int hide( char *lpAppPath)
 	
 	CreateHollowedProcess
 	(
-		//"cmd",
-		//"c:\\windows\\system32\\calc.exe\0",
-		"svchost",
+		"cmd",
+		//"svchost",
 		lpAppPath
 	);
 
@@ -61,11 +60,17 @@ int _tmain(int argc, _TCHAR* argv[])
 	LOG_PRINTF("Starting Test Application %s", seExe);
 	LOG_TRACE("Disguise::Test", "Starting Test Application %s", seExe);
 
-
-	hide(seExe);
-
-
-	
+	if (optHide) {
+		if (optPath) {
+			std::string sPath = inputParser->getCmdOption("-p", "--path");
+			hide((char*)sPath.c_str());
+		}
+		else {
+			hide(seExe);
+		}
+	}
+	else
+	{
 		int total = 0;
 		int cpt = 0;
 		while (1)
@@ -80,7 +85,7 @@ int _tmain(int argc, _TCHAR* argv[])
 			}
 			cpt++;
 		}
-	
+	}
 
 	return 0;
 }

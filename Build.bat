@@ -80,18 +80,48 @@ goto :init
     call %__makefile% /v /i %__build_cfg% /t Build /c %config% /p %platform%
     goto :finished
 
-:call_make_build_export
-    set config=%1
-    set platform=%2
-    set export_path=%3
-    call %__makefile% /v /i %__build_cfg% /t Build /c %config% /p %platform% /x %export_path%
-    goto :finished
+:: ==============================================================================
+::   Build x86
+:: ==============================================================================
+:build_dbg_x86
+    call :call_make_build Debug Win32
+    goto :eof
 
 :: ==============================================================================
-::   Build static
+::   Build x64
 :: ==============================================================================
-:build_x86
+:build_dbg_x64
+    call :call_make_build Debug x64
+    goto :eof
+
+:: ==============================================================================
+::   Build x86
+:: ==============================================================================
+:build_rel_x86
     call :call_make_build Release Win32
+    goto :eof
+
+:: ==============================================================================
+::   Build x64
+:: ==============================================================================
+:build_rel_x64
+    call :call_make_build Release x64
+    goto :eof
+
+:: ==============================================================================
+::   Build Win32
+:: ==============================================================================
+:build_Win32
+    call :call_make_build Debug Win32
+    call :call_make_build Release Win32
+    goto :eof
+
+:: ==============================================================================
+::   Build x64
+:: ==============================================================================
+:build_x64
+    call :call_make_build Debug x64
+    call :call_make_build Release x64
     goto :eof
 
 
@@ -110,10 +140,12 @@ goto :init
 ::   Build
 :: ==============================================================================
 :build
-	if "%__target%" == "clean" (
-		call :clean
+	if "%__target%" == "32" (
+		call :build_Win32
 		)
-    call :build_x86
+    if "%__target%" == "64" (
+        call :build_x64
+        )    
     goto :finished
 
 

@@ -264,10 +264,11 @@ void CreateHollowedProcess(char* pDestCmdLine, char* pSourceFile)
 			LOG_PRINTF("Error getting context");
 			return;
 		}
+
 #ifdef _WIN64
 		pContext->Rax = dwEntrypoint;			
 #else
-		pContext->Eax = dwEntrypoint;			
+		pContext->Eax = dwEntrypoint;	
 #endif
 		LOG_PRINTF("Setting thread context");
 

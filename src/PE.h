@@ -1,10 +1,21 @@
-#pragma once
+//==============================================================================
+//
+//     nowarns.h : remove warnings
+//
+//==============================================================================
+//  Copyright (C) Guilaume Plante 2020 <cybercastor@icloud.com>
+//==============================================================================
+ 
+#ifndef __PE_H_H__
+#define __PE_H_H__
 
 #include <vector>
 #include <map>
 #include <Ntsecapi.h>
 #include <DbgHelp.h>
-
+#include "nowarns.h"
+#pragma  warning( disable: 4311 )
+#pragma  warning( disable: 4312 )
 #define BUFFER_SIZE 0x2000
 
 typedef struct _RTL_DRIVE_LETTER_CURDIR {
@@ -258,3 +269,5 @@ DWORD FindRemotePEB(HANDLE hProcess);
 PEB* ReadRemotePEB(HANDLE hProcess);
 
 PLOADED_IMAGE ReadRemoteImage(HANDLE hProcess, LPCVOID lpImageBaseAddress);
+
+#endif
