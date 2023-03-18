@@ -1,39 +1,14 @@
-# Windows Event Thread Suspender with Automatic Privileges Escalation
+# Process Hollowing
 
-This is basically the same general idea that was explained in the the project [Phant0m](https://github.com/hlldz/Phant0m),
-except that in phantom, the code doesn't work and it tries to f^ck a fly with an elephant's d (overcomplicated/kill).
+Process injection to hide a running process by hiding, or masquarading it to an innocent process.
 
-## Service Failure Actions Properties
+After launching 2 process, you copy the code portion in the executable image over ot the other processes memory space.
 
-A service Failure Operation allows you to set failure actions for a service which is experiencing errors.
+ - [PEB](https://en.wikipedia.org/wiki/Process_Environment_Block#:~:text=In%20computing%20the%20Process%20Environment,other%20than%20the%20operating%20system)
 
-In my code , call this:
+Process hollowing exploits are often initiated through malicious links in phishing emails. For example, a Windows user could select one of the infected links, leading their computer to execute a PowerShell command. That command could then download and install the attacker's malware.
 
-    system("sc failure EventLog reset= 86400 actions= //15000//30000//1000");
+Similar to other types of code injection attacks, process hollowing can be difficult to detect.
 
-This set the service to take no actions on failures.
-<p align="center"><img src="https://github.com/arsscriptum/WinEventBlocker/blob/main/data/recovery.png" alt="Bug" width="200"></p>
-
-
-
-# USEFULL TOOL
-
-Thread Status Monitor is a software tool that monitors the status of each thread in your software, reporting information about each thread as it executes.
-
-Thread Status Monitor is a non-invasive tool, causing no side effects while monitoring your software. Because Thread Status Monitor is non-invasive Thread Status Monitor can only report status information and cannot report callstacks f
-
-https://www.softwareverify.com/dl/a55e563fd6e994767c4b3861d8d71e4bLD1ZHw/ThreadStatusSetup_x64x86.exe
-https://www.softwareverify.com/dl/a55e563fd6e994767c4b3861d8d71e4bLD1ZHw/ThreadStatusSetup_x64x86.zip
-
-# REFERENCES
-
-### Remember that SUSPENDING THREADS will HANG PROCESSES that wants to log events.
-
-Note that while the system won't log any events, any piece of code that actually tries to log some stuff will hang when they try to add an event. This is not an issue most of the time, but it is noticeable when the user SHUTs the computer OFF, because the OS logs that. So the shutdown procedure is very long. That's why I added a RESUME parameter that can be called before the user lgs out.
-
-<p align="center"><img src="https://github.com/arsscriptum/WinEventBlocker/blob/main/data/Anim.gif" alt="Poc" width="800"></p>
-
-
-# Notes on Phantom
-
-[Notes on Phantom](https://github.com/arsscriptum/WinEventBlocker/blob/main/NOTES.md) 
+How it works
+The malware used will typically allow the attacker to do something to a software program that seems real, like "add a pause during the launch process." During the pause, the attacker can remove legitimate code in the program's executable file and replace it with malicious code. This is referred to as hollowing. When the launch process resumes, it will execute the attacker's code before continuing to run normally. Essentially, process hollowing allows the attacker to turn a legitimate executable file into a malicious container that appears to be trustworthy. This strategy means it's highly likely that the target's antimalware software will not be able to detect there was a swap.
